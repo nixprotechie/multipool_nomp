@@ -8,6 +8,8 @@ source /etc/functions.sh
 source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
 
+sudo mkdir -p /var/www/'"${DomainName}"'/html
+
 echo -e " Generating Certbot Request for ${DomainName} ...$COL_RESET"
 sudo mkdir -p /var/www/_letsencrypt
 sudo chown www-data /var/www/_letsencrypt
