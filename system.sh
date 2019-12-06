@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #####################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
 # Updated by cryptopool.builders for crypto use...
@@ -105,12 +106,12 @@ autoconf pkg-config libssl-dev libboost-all-dev git \
 libminiupnpc-dev
 echo -e "$GREEN Done...$COL_RESET"
 
-echo -e " Installing Node 8.x$COL_RESET"
+echo -e " Installing Node 10.25$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
-curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
+curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | bash >/dev/null 2>&1
 source ~/.profile
-nvm install 0.10.25
-nvm use 0.10.25
+nvm install 0.10.25 >/dev/null 2>&1
+nvm use 0.10.25 >/dev/null 2>&1
 sudo chown -R $USER /usr/lib/node_modules
 echo -e "$GREEN Done...$COL_RESET"
 
