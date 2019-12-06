@@ -10,7 +10,8 @@ source /etc/multipool.conf
 message_box "Ultimate Crypto-Server NOMP Installer" \
 "You have choosen to install NOMP Single Server!
 \n\nThis will install NOMP and help setup your first coin for the server.
-\n\nAfter answering the following questions, setup will be mostly automated.
+\n\n
+\n\nAfter answering the following questions, setup will be mostly automated, until the coin build.
 \n\nNOTE: If installing on a system with less then 2 GB of RAM you may experience system issues!"
 
 

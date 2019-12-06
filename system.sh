@@ -109,10 +109,11 @@ echo -e "$GREEN Done...$COL_RESET"
 echo -e " Installing Node 10.25$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
 curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | bash
-source ~/.profile
+cd
+source .bash_profile
 nvm install 0.10.25
-nvm use 0.10.25 
-sudo chown -R $USER /usr/lib/node_modules
+nvm use 0.10.25
+# sudo chown -R $USER /usr/lib/node_modules
 apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 
