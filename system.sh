@@ -108,13 +108,13 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Installing Node 10.25$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash >/dev/null 2>&1
 cd
 . ~/.nvm/nvm.sh
 . ~/.profile
 . ~/.bashrc
-nvm install 0.10.25
-nvm use 0.10.25
+nvm install 8.1.4 >/dev/null 2>&1
+nvm use 8.1.4 >/dev/null 2>&1
 # sudo chown -R $USER /usr/lib/node_modules
 apt_install npm
 echo -e "$GREEN Done...$COL_RESET"

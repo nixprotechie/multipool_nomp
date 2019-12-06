@@ -64,17 +64,17 @@ if [[ ("$autogen" == "true") ]]; then
   if [[ ("$berkeley" == "4.8") ]]; then
     echo -e " Building using Berkeley 4.8...$COL_RESET"
     basedir=$(pwd)
-    sh autogen.sh
+    sh autogen.sh >/dev/null 2>&1
     sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/share/genbuild.sh
     sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/src/leveldb/build_detect_platform
-    ./configure CPPFLAGS="-I$STORAGE_ROOT/berkeley/db4/include -O2" LDFLAGS="-L$STORAGE_ROOT/berkeley/db4/lib" --without-gui --disable-tests
+    ./configure CPPFLAGS="-I$STORAGE_ROOT/berkeley/db4/include -O2" LDFLAGS="-L$STORAGE_ROOT/berkeley/db4/lib" --without-gui --disable-tests >/dev/null 2>&1
   else
     echo -e " Building using Berkeley 5.1...$COL_RESET"
     basedir=$(pwd)
-    sh autogen.sh
+    sh autogen.sh >/dev/null 2>&1
     sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/share/genbuild.sh
     sudo chmod 777 $STORAGE_ROOT/daemon_builderr/temp_coin_builds/$coindir/src/leveldb/build_detect_platform
-    ./configure CPPFLAGS="-I$STORAGE_ROOT/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/berkeley/db5/lib" --without-gui --disable-tests
+    ./configure CPPFLAGS="-I$STORAGE_ROOT/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/berkeley/db5/lib" --without-gui --disable-tests >/dev/null 2>&1
   fi
   make -j$(nproc)
   else
@@ -92,8 +92,8 @@ if [[ ("$autogen" == "true") ]]; then
   fi
   cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/src/leveldb
   sudo chmod +x build_detect_platform
-  sudo make clean
-  sudo make libleveldb.a libmemenv.a
+  sudo make clean >/dev/null 2>&1
+  sudo make libleveldb.a libmemenv.a >/dev/null 2>&1
   cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/src
   sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/crypto-data/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/crypto-data/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/crypto-data/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/crypto-data/openssl/include' makefile.unix
   make -j$NPROC -f makefile.unix USE_UPNP=-

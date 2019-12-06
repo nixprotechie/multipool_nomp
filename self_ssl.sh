@@ -8,7 +8,7 @@ source /etc/functions.sh
 source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
 
-echo -e "Creating initial SSL certificate...$COL_RESET"
+echo -e " Creating initial SSL certificate...$COL_RESET"
 
 # Install openssl.
 apt_install openssl
