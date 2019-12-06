@@ -113,6 +113,7 @@ source ~/.profile
 nvm install 0.10.25 >/dev/null 2>&1
 nvm use 0.10.25 >/dev/null 2>&1
 sudo chown -R $USER /usr/lib/node_modules
+apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Downloading cryptopool.builders NOMP Repo...$COL_RESET"
