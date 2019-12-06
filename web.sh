@@ -40,7 +40,6 @@ sudo find $STORAGE_ROOT/nomp/site/ -type f -exec chmod 664 {} +
 sudo chgrp www-data $STORAGE_ROOT -R
 sudo chmod g+w $STORAGE_ROOT -R
 echo -e "$GREEN Done...$COL_RESET"
+echo -e "$GREEN Web build complete...$COL_RESET"
 
 cd $HOME/multipool/nomp
-
-echo -e "$GREEN Web build complete...$COL_RESET"

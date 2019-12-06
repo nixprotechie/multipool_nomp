@@ -25,4 +25,4 @@ sudo newaliases
 
 sudo adduser $whoami mail
 echo -e "$GREEN Mail system complete...$COL_RESET"
-cd $HOME/multipool/yiimp_single
+cd $HOME/multipool/nomp

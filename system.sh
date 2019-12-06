@@ -107,7 +107,8 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Installing Node 8.x$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash
+hide_output curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash
+sudo chown -R $USER /usr/local/lib/node_modules
 hide_output sudo apt-get update
 apt_install nodejs
 npm install -g n

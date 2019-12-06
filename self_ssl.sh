@@ -6,7 +6,7 @@
 
 source /etc/functions.sh
 source /etc/multipool.conf
-source $STORAGE_ROOT/yiimp/.yiimp.conf
+source $STORAGE_ROOT/nomp/.nomp.conf
 
 echo -e "Creating initial SSL certificate...$COL_RESET"
 
@@ -57,4 +57,4 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 fi
 
 echo -e "$GREEN Initial Self Signed SSL Generation complete...$COL_RESET"
-cd $HOME/multipool/yiimp_single
+cd $HOME/multipool/nomp

@@ -6,7 +6,7 @@
 source /etc/functions.sh
 source /etc/multipool.conf
 
-message_box "Ultimate Crypto-Server NOMP Setup Installer v1.13" \ 
+message_box "Ultimate Crypto-Server NOMP Setup Installer" \ 
 "You have choosen to install NOMP Single Server!
 \n\nThis will install NOMP and help setup your first coin for the server.
 \n\nAfter answering the following questions, setup will be mostly automated.
