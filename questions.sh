@@ -135,7 +135,7 @@ fi
 fi
 
 if [ -z "$coinrepo" ]; then
-DEFAULT_coinrepo="github"
+DEFAULT_coinrepo="https://github.com/bitcoin/bitcoin.git"
 input_box "Default Coin Repo" \
 "Enter your coins repo to use..
 \n\nIf you are using a private repo and do not specify the user name and password here, you will be promted
