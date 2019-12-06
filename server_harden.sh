@@ -7,8 +7,9 @@
 
 source /etc/functions.sh
 source /etc/multipool.conf
+source $STORAGE_ROOT/nomp/.nomp.conf
 
-echo Boosting server performance for NOMP...
+echo -e " Boosting server performance for NOMP...$COL_RESET"
 # Boost Network Performance by Enabling TCP BBR
 hide_output sudo apt install -y --install-recommends linux-generic-hwe-16.04
 echo 'net.core.default_qdisc=fq' | hide_output sudo tee -a /etc/sysctl.conf
@@ -25,4 +26,4 @@ echo 'net.ipv4.tcp_sack = 1' | hide_output sudo tee -a /etc/sysctl.conf
 echo 'net.ipv4.tcp_no_metrics_save = 1' | hide_output sudo tee -a /etc/sysctl.conf
 echo 'net.core.netdev_max_backlog = 5000' | hide_output sudo tee -a /etc/sysctl.conf
 
-echo Tuning complete...
+echo -e "$GREEN Tuning complete...$COL_RESET"

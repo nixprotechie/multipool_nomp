@@ -3,8 +3,8 @@
 #####################################################
 
 source /etc/functions.sh
+source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
-source $HOME/multipool/daemon_builder/.my.cnf
 
 # Create function for random unused port
 function EPHYMERAL_PORT(){
@@ -20,13 +20,13 @@ function EPHYMERAL_PORT(){
     done
 }
 
-echo "Making the NOMPness Monster"
+echo -e " Making the NOMPness Monster...$COL_RESET"
 
 cd $STORAGE_ROOT/nomp/site/
 
 # NPM install and update, user can ignore errors
-npm install
 npm i npm@latest -g
+npm install
 
 # SED config file
 sudo sed -i 's/FQDN/'$StratumURL'/g' config.json
@@ -70,11 +70,11 @@ sudo sed -i 's/getblocktx/'$getblocktx'/g' $coinname.json
 sudo sed -i 's/cointime/'$cointime'/g' $coinname.json
 
 # Allow user account to bind to port 80 and 443 with out sudo privs
-apt_install authbind
-sudo touch /etc/authbind/byport/80
-sudo touch /etc/authbind/byport/443
-sudo chmod 777 /etc/authbind/byport/80
-sudo chmod 777 /etc/authbind/byport/443
+# apt_install authbind
+# sudo touch /etc/authbind/byport/80
+# sudo touch /etc/authbind/byport/443
+# sudo chmod 777 /etc/authbind/byport/80
+# sudo chmod 777 /etc/authbind/byport/443
 
 # Update site with users information
 cd $STORAGE_ROOT/nomp/site/website/
@@ -85,4 +85,5 @@ sudo sed -i 's/sed_stratum/'$StratumURL'/g' getting_started.html
 sudo sed -i 's/sed_domain/'$DomainName'/g' home.html
 sudo sed -i 's/sed_stratum/'$StratumURL'/g' pools.html
 
+echo -e "$GREEN Done with the NOMP...$COL_RESET"
 cd $HOME/multipool/nomp

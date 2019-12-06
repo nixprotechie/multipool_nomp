@@ -3,9 +3,10 @@
 #####################################################
 
 source /etc/functions.sh
+source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
 
-echo Installing Redis...
+echo -e " Installing Redis...$COL_RESET"
 apt_install build-essential tcl
 
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
@@ -14,7 +15,7 @@ hide_output tar xzvf redis-stable.tar.gz
 cd redis-stable
 hide_output make
 hide_output sudo make install
-sudo mkdir /etc/redis
+sudo mkdir -p /etc/redis
 sudo cp -r $STORAGE_ROOT/nomp/nomp_setup/tmp/redis-stable/redis.conf /etc/redis
 
 sudo sed -i 's/supervised no/supervised systemd/g' /etc/redis/redis.conf
@@ -43,6 +44,6 @@ sudo chmod 770 /var/lib/redis
 sudo systemctl start redis
 sudo systemctl enable redis
 
-echo Database build complete...
+echo -e "$GREEN Database build complete...$COL_RESET"
 
 cd $HOME/multipool/nomp

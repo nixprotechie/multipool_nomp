@@ -3,9 +3,10 @@
 #####################################################
 
 source /etc/functions.sh
+source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
 
-echo Installing cron screens to crontab...
+echo -e " Installing cron screens to crontab...$COL_RESET"
 (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /home/crypto-data/nomp/starts/nomp.start.sh") | crontab -
 (crontab -l 2>/dev/null; echo "@reboot source /etc/functions.sh") | crontab -
 (crontab -l 2>/dev/null; echo "@reboot source /etc/multipool.conf") | crontab -
@@ -23,7 +24,7 @@ source /etc/multipool.conf
 #
 ################################################################################
 cd $STORAGE_ROOT/nomp/site
-screen -dmS nomp authbind node init.js
+screen -dmS nomp node init.js
 ' | sudo -E tee $STORAGE_ROOT/nomp/starts/nomp.start.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/nomp/starts/nomp.start.sh
 
@@ -36,3 +37,5 @@ echo "source /etc/multipool.conf" | hide_output tee -a ~/.bashrc
 echo "source $STORAGE_ROOT/nomp/.prescreens.start.conf" | hide_output tee -a ~/.bashrc
 
 sudo rm -r $STORAGE_ROOT/nomp/nomp_setup
+
+echo -e "$GREEN Done...$COL_RESET"

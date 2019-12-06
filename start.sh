@@ -26,29 +26,33 @@ export LC_TYPE=en_US.UTF-8
 export NCURSES_NO_UTF8_ACS=1
 
 # Create the temporary installation directory if it doesn't already exist.
-echo Creating the temporary NOMP installation folder...
+echo Creating the NOMP directories...
 if [ ! -d $STORAGE_ROOT/nomp/nomp_setup ]; then
-sudo mkdir -p $STORAGE_ROOT/nomp/nomp_setup
-sudo mkdir -p $STORAGE_ROOT/nomp/nomp_setup/tmp
-sudo mkdir -p $STORAGE_ROOT/nomp/site
-sudo mkdir -p $STORAGE_ROOT/nomp/starts
-sudo mkdir -p $STORAGE_ROOT/wallets
-sudo mkdir -p $HOME/multipool/daemon_builder
+  sudo mkdir -p $STORAGE_ROOT/{wallets,nomp/{nomp_setup/{tmp,log},site/log,starts}}
+  sudo touch $STORAGE_ROOT/nomp/nomp_setup/log/installer.log
+  sudo mkdir -p $HOME/multipool/daemon_builder
 fi
+
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/site
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/site/log
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/wallets
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/nomp_setup/tmp
 
 # Start the installation.
 source questions.sh
 source system.sh
+source self_ssl.sh
 source db.sh
+source nginx_upgrade.sh
 source web.sh
 source daemon.sh
 source build_coin.sh
 source nomp.sh
 source motd.sh
+if [[ ("$UsingDomain" == "Yes") ]]; then
+  source send_mail.sh
+fi
 source server_harden.sh
 source server_cleanup.sh
 
