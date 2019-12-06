@@ -26,8 +26,9 @@ echo -e " Making the NOMPness Monster...$COL_RESET"
 cd $STORAGE_ROOT/nomp/site/
 
 # NPM install and update, user can ignore errors
-npm i npm@latest -g
 npm install
+npm i npm@latest -g
+
 
 # SED config file
 sudo sed -i 's/FQDN/'$StratumURL'/g' config.json
