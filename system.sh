@@ -110,7 +110,7 @@ cd $STORAGE_ROOT/nomp/nomp_setup/tmp
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash
 hide_output sudo apt-get update
 apt_install nodejs
-sudo chown -R $USER /usr/local/lib/node_modules
+sudo chown -R $USER /usr/lib/node_modules
 npm install -g n
 sudo n lts
 echo -e "$GREEN Done...$COL_RESET"
