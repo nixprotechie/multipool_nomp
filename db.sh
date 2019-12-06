@@ -41,8 +41,8 @@ hide_output sudo adduser --system --group --no-create-home redis
 sudo mkdir /var/lib/redis
 sudo chown redis:redis /var/lib/redis
 sudo chmod 770 /var/lib/redis
-sudo systemctl start redis
-sudo systemctl enable redis
+sudo systemctl start redis > /dev/null 2>&1
+sudo systemctl enable redis > /dev/null 2>&1
 
 echo -e "$GREEN Database build complete...$COL_RESET"
 

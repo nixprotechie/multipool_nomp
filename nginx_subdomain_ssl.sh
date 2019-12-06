@@ -81,4 +81,4 @@ server {
 ' | sudo -E tee /etc/nginx/sites-available/${DomainName}.conf >/dev/null 2>&1
 
 restart_service nginx
-cd $HOME/multipool/yiimp_single
+cd $HOME/multipool/nomp

@@ -107,12 +107,11 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Installing Node 8.x$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash > /dev/null 2>&1
-hide_output sudo apt-get update
-apt_install nodejs
+curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
+source ~/.profile
+nvm install 0.10.25
+nvm use 0.10.25
 sudo chown -R $USER /usr/lib/node_modules
-hide_output sudo npm install -g n
-hide_output sudo n lts
 echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Downloading cryptopool.builders NOMP Repo...$COL_RESET"

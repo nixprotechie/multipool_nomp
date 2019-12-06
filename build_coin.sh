@@ -9,7 +9,6 @@ source $STORAGE_ROOT/nomp/.nomp.conf
 source $HOME/multipool/daemon_builder/.first_build.cnf
 cd $HOME/multipool/daemon_builder
 
-
 echo -e " Starting initial coin build, this may take awhile...$COL_RESET"
 
 # Select random unused port for coin.conf creation
@@ -160,7 +159,7 @@ sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir
 sudo rm -r $HOME/multipool/daemon_builder/.first_build.cnf
 
 echo 'rpcpassword='${rpcpassword}'
-rpcport='${rpcport}''| sudo -E tee $HOME/multipool/daemon_builder/.first_build.cnf
+rpcport='${rpcport}''| sudo -E tee $HOME/multipool/daemon_builder/.first_build.cnf >/dev/null 2>&1
 
 echo -e "$GREEN Initial coin build completed...$COL_RESET"
 cd $HOME/multipool/nomp

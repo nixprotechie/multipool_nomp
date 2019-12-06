@@ -72,4 +72,4 @@ sudo ln -s /etc/nginx/sites-available/${DomainName}.conf /etc/nginx/sites-enable
 sudo ln -s $STORAGE_ROOT/yiimp/site/web /var/www/${DomainName}/html
 
 restart_service nginx
-cd $HOME/multipool/yiimp_single
+cd $HOME/multipool/nomp
