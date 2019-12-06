@@ -80,5 +80,8 @@ server {
 }
 ' | sudo -E tee /etc/nginx/sites-available/${DomainName}.conf >/dev/null 2>&1
 
+sudo ln -s /etc/nginx/sites-available/${DomainName}.conf /etc/nginx/sites-enabled/${DomainName}.conf
+sudo ln -s $STORAGE_ROOT/yiimp/site/web/website /var/www/${DomainName}/html
+
 restart_service nginx
 cd $HOME/multipool/nomp

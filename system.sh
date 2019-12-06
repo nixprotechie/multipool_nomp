@@ -108,7 +108,7 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Installing Node 8.x$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash >/dev/null 2>&1
+curl -ss -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash >/dev/null 2>&1
 cd
 . ~/.nvm/nvm.sh
 . ~/.profile

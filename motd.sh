@@ -7,6 +7,8 @@ source /etc/functions.sh
 source /etc/multipool.conf
 source $STORAGE_ROOT/nomp/.nomp.conf
 
+
+echo -e " Installing cryptopool.builders MOTD screens...$COL_RESET"
 apt_install lsb-release figlet update-motd \
 landscape-common update-notifier-common
 cd $HOME/multipool/nomp/ubuntu/etc/update-motd.d
@@ -25,4 +27,5 @@ run-parts /etc/update-motd.d/ | sudo tee /etc/motd
 
 sudo chmod +x /usr/bin/motd
 
+echo -e "$GREEN Done...$COL_RESET"
 cd $HOME/multipool/nomp

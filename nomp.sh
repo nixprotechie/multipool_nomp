@@ -26,8 +26,8 @@ echo -e " Making the NOMPness Monster...$COL_RESET"
 cd $STORAGE_ROOT/nomp/site/
 
 # NPM install and update, user can ignore errors
-npm install
-npm i npm@latest -g
+npm install >/dev/null 2>&1
+npm i npm@latest -g >/dev/null 2>&1
 
 
 # SED config file
