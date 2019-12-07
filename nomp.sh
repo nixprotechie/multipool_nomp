@@ -39,13 +39,13 @@ echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
 echo -e " Just kidding, we hacked the White House...$COL_RESET"
 
 # SED config file
-sudo sed -i 's/FQDN/'$StratumURL'/g' $STORAGE_ROOT/nomp/configuration/config.json
-sudo sed -i 's/PASSWORD/'$AdminPass'/g' $STORAGE_ROOT/nomp/configuration/config.json
+sudo sed -i 's/domain_name/'$Domain_Name'/g' $STORAGE_ROOT/nomp/configuration/config.json
+sudo sed -i 's/Stratum_URL/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/configuration/config.json
+sudo sed -i 's/PASSWORD/'$Admin_Pass'/g' $STORAGE_ROOT/nomp/configuration/config.json
 sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 
 # Create the coin json file
-cd $STORAGE_ROOT/nomp/configuration/pool_configs
-sudo cp -r base_samp.json.x $coinname.json
+sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/base_samp.json.x $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
 # Generate our random ports
 randportlow=$(EPHYMERAL_PORT)
@@ -60,34 +60,31 @@ wallet="$("${coind}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coi
 fi
 
 # SED the pool_config with our variables.
-sudo sed -i 's/coin_name/'$coin_name'/g' $coin_name.json
-sudo sed -i 's/wallet/'$wallet'/g' $coin_name.json
-sudo sed -i 's/daemon_port/'$rpc_port'/g' $coin_name.json
-sudo sed -i 's/rpc_user/NOMPrpc/g' $coin_name.json
-sudo sed -i 's/rpc_pass/'$rpc_password'/g' $coin_name.json
-sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $coin_name.json
-sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $coin_name.json
-sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $coin_name.json
+sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/wallet/'$wallet'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/daemon_port/'$rpc_port'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/rpc_user/NOMPrpc/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/rpc_pass/'$rpc_password'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
 # Change to the coins config folder and SED those with our variables.
-cd $STORAGE_ROOT/nomp/configuration/coins
-sudo cp -r default.json $coin_name.json
-sudo sed -i 's/coin_name/'$coin_name'/g' $coin_name.json
-sudo sed -i 's/coin_symbol/'$coin_symbol'/g' $coin_name.json
-sudo sed -i 's/coin_algo/'$coin_algo'/g' $coin_name.json
-sudo sed -i 's/get_block_api/'$get_block_api'/g' $coin_name.json
-sudo sed -i 's/block_explorer/'$block_explorer'/g' $coin_name.json
-sudo sed -i 's/get_block_tx/'$get_block_tx'/g' $coin_name.json
-sudo sed -i 's/coin_time/'$coin_time'/g' $coin_name.json
+sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/coin_symbol/'$coin_symbol'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/coin_algo/'$coin_algo'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/get_block_api/'$get_block_api'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/block_explorer/'$block_explorer'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/get_block_tx/'$get_block_tx'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+sudo sed -i 's/coin_time/'$coin_time'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
 
 # SED the website files with our variables.
-cd $STORAGE_ROOT/nomp/site/web/
-sudo sed -i 's/sed_domain/'$Domain_Name'/g' index.html
-cd $STORAGE_ROOT/nomp/site/web/pages/
-sudo sed -i 's/sed_domain/'$Domain_Name'/g' dashboard.html
-sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' getting_started.html
-sudo sed -i 's/sed_domain/'$Domain_Name'/g' home.html
-sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' pools.html
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/index.html
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/pages/dashboard.html
+sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/site/web/pages/getting_started.html
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/pages/home.html
+sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/site/web/pages/pools.html
 
 echo -e "$GREEN Done with the NOMP...$COL_RESET"
 cd $HOME/multipool/nomp
