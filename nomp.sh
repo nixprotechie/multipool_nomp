@@ -23,7 +23,7 @@ function EPHYMERAL_PORT(){
 
 echo -e " Making the NOMPness Monster...$COL_RESET"
 echo -e " Script will seem to hang for several minutes...$COL_RESET"
-cd $STORAGE_ROOT/nomp/site/
+cd $STORAGE_ROOT/nomp/core/
 
 # NPM install and update, user can ignore errors
 npm install >/dev/null 2>&1

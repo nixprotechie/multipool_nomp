@@ -38,7 +38,7 @@ else
 fi
 
 daemon='/home/crypto-data/wallets'
-site='/home/crypto-data/nomp/site'
+site='/home/crypto-data/nomp/site/web'
 hint1="To view the NOMP screen type, screen -r nomp"
 hint2="To detach from the screen type, ctrl+a+d"
 divider===============================
