@@ -20,8 +20,8 @@ sudo sed -i '/#mydestination/i mydestination = $myhostname, localhost.$mydomain,
 sudo systemctl restart postfix
 whoami=`whoami`
 
-sudo sed -i '/postmaster:    root/a root:          '${SupportEmail}'' /etc/aliases
-sudo sed -i '/root:/a '$whoami':     '${SupportEmail}'' /etc/aliases
+sudo sed -i '/postmaster:    root/a root:          '${Support_Email}'' /etc/aliases
+sudo sed -i '/root:/a '$whoami':     '${Support_Email}'' /etc/aliases
 sudo newaliases
 
 sudo adduser $whoami mail

@@ -22,49 +22,49 @@ dialog --title "Using Domain Name" \
 Make sure the DNS is updated!" 7 60
 response=$?
 case $response in
-   0) UsingDomain=yes;;
-   1) UsingDomain=no;;
+   0) Using_Domain=yes;;
+   1) Using_Domain=no;;
    255) echo "[ESC] key pressed.";;
 esac
 
-if [[ ("$UsingDomain" == "yes") ]]; then
+if [[ ("$Using_Domain" == "yes") ]]; then
 
 dialog --title "Using Sub-Domain" \
 --yesno "Are you using a sub-domain for the main website domain? Example pool.example.com?
 Make sure the DNS is updated!" 7 60
 response=$?
 case $response in
-   0) UsingSubDomain=yes;;
-   1) UsingSubDomain=no;;
+   0) Using_Sub_Domain=yes;;
+   1) Using_Sub_Domain=no;;
    255) echo "[ESC] key pressed.";;
 esac
 
-if [ -z "${DomainName:-}" ]; then
-DEFAULT_DomainName=example.com
+if [ -z "${Domain_Name:-}" ]; then
+DEFAULT_Domain_Name=example.com
 input_box "Domain Name" \
 "Enter your domain name. If using a subdomain enter the full domain as in pool.example.com
 \n\nDo not add www. to the domain name.
 \n\nMake sure the domain is pointed to this server before continuing!
 \n\nDomain Name:" \
-${DEFAULT_DomainName} \
+${DEFAULT_Domain_Name} \
 DomainName
 
-if [ -z "${DomainName}" ]; then
+if [ -z "${Domain_Name}" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "${StratumURL:-}" ]; then
-DEFAULT_StratumURL=stratum.${DomainName}
+if [ -z "${Stratum_URL:-}" ]; then
+DEFAULT_Stratum_URL=stratum.${Domain_Name}
 input_box "Stratum URL" \
-"Enter your stratum URL. It is recommended to use another subdomain such as stratum.${DomainName}
+"Enter your stratum URL. It is recommended to use another subdomain such as stratum.${Domain_Name}
 \n\nDo not add www. to the domain name.
 \n\nStratum URL:" \
-${DEFAULT_StratumURL} \
+${DEFAULT_Stratum_URL} \
 StratumURL
 
-if [ -z "${StratumURL}" ]; then
+if [ -z "${Stratum_URL}" ]; then
 # user hit ESC/cancel
 exit
 fi
@@ -74,8 +74,8 @@ dialog --title "Install SSL" \
 --yesno "Would you like the system to install SSL automatically?" 7 60
 response=$?
 case $response in
-   0) InstallSSL=yes;;
-   1) InstallSSL=no;;
+   0) Install_SSL=yes;;
+   1) Install_SSL=no;;
    255) echo "[ESC] key pressed.";;
 esac
 else
@@ -83,36 +83,36 @@ else
 # If user is not using a domain and is just using the server IP these fileds can be automatically detected.
 
 # Sets server IP automatically
-DomainName=$(get_publicip_from_web_service 4 || get_default_privateip 4)
-StratumURL=$(get_publicip_from_web_service 4 || get_default_privateip 4)
-UsingSubDomain=no
-InstallSSL=no
+Domain_Name=$(get_publicip_from_web_service 4 || get_default_privateip 4)
+Stratum_URL=$(get_publicip_from_web_service 4 || get_default_privateip 4)
+Using_Sub_Domain=no
+Install_SSL=no
 fi
 
-if [ -z "$AdminPass" ]; then
-DEFAULT_AdminPass=$(openssl rand -base64 8 | tr -d "=+/")
+if [ -z "$Admin_Pass" ]; then
+DEFAULT_Admin_Pass=$(openssl rand -base64 8 | tr -d "=+/")
 input_box "Admin Password" \
 "Enter your new Admin password or use this randomly system generated one.
 \n\nUnfortunatley dialog doesnt let you copy. So you have to write it down.
 \n\nAdmin password:" \
-$DEFAULT_AdminPass \
-AdminPass
+$DEFAULT_Admin_Pass \
+Admin_Pass
 
-if [ -z "$AdminPass" ]; then
+if [ -z "$Admin_Pass" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "$SupportEmail" ]; then
-DEFAULT_SupportEmail=root@localhost
+if [ -z "$Support_Email" ]; then
+DEFAULT_Support_Email=root@localhost
 input_box "System Email" \
 "Enter an email address for the system to send alerts and other important messages.
 \n\nSystem Email:" \
-$DEFAULT_SupportEmail \
-SupportEmail
+$DEFAULT_Support_Email \
+Support_Email
 
-if [ -z "$SupportEmail" ]; then
+if [ -z "$Support_Email" ]; then
 # user hit ESC/cancel
 exit
 fi
@@ -120,74 +120,74 @@ fi
 
 # Get the coind info they want to build during install.
 
-if [ -z "$coinname" ]; then
-DEFAULT_coinname=Bitcoin
+if [ -z "$coin_name" ]; then
+DEFAULT_coin_name=Bitcoin
 input_box "Coin Name" \
 "Enter your first coins name..
 \n\nCoin Name:" \
-$DEFAULT_coinname \
-coinname
+$DEFAULT_coin_name \
+coin_name
 
-if [ -z "$coinname" ]; then
+if [ -z "$coin_name" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "$coinrepo" ]; then
-DEFAULT_coinrepo="https://github.com/bitcoin/bitcoin.git"
+if [ -z "$coin_repo" ]; then
+DEFAULT_coin_repo="https://github.com/bitcoin/bitcoin.git"
 input_box "Default Coin Repo" \
 "Enter your coins repo to use..
 \n\nIf you are using a private repo and do not specify the user name and password here, you will be promted
 \n\nfor it during the installation. Instalaltion will not continue until you enter that information.
 \n\nWhen pasting your link CTRL+V does NOT work, you must either SHIFT+RightMouseClick or SHIFT+INSERT!!
 \n\nDefault Coin Repo:" \
-$DEFAULT_coinrepo \
-coinrepo
+$DEFAULT_coin_repo \
+coin_repo
 
-if [ -z "$coinrepo" ]; then
+if [ -z "$coin_repo" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "$coinsymbol" ]; then
-DEFAULT_coinsymbol=BTC
+if [ -z "$coin_symbol" ]; then
+DEFAULT_coin_symbol=BTC
 input_box "Coin Symbol" \
 "Enter your coins symbol..
 \n\nCoin Symbol:" \
-$DEFAULT_coinsymbol \
-coinsymbol
+$DEFAULT_coin_symbol \
+coin_symbol
 
-if [ -z "$coinsymbol" ]; then
+if [ -z "$coin_symbol" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "$coinalgo" ]; then
-DEFAULT_coinalgo=sha256
+if [ -z "$coin_algo" ]; then
+DEFAULT_coin_algo=sha256
 input_box "Coin Algorithm" \
 "Enter your coins algorithm.. Enter as all lower case...
 \n\nCoin Algorithm:" \
-$DEFAULT_coinalgo \
-coinalgo
+$DEFAULT_coin_algo \
+coin_algo
 
-if [ -z "$coinalgo" ]; then
+if [ -z "$coin_algo" ]; then
 # user hit ESC/cancel
 exit
 fi
 fi
 
-if [ -z "$cointime" ]; then
-DEFAULT_cointime=120
+if [ -z "$coin_time" ]; then
+DEFAULT_coin_time=120
 input_box "Coin Block Time" \
 "Enter your coins block time in seconds..
 \n\nCoin Block Time:" \
-$DEFAULT_cointime \
-cointime
+$DEFAULT_coin_time \
+coin_time
 
-if [ -z "$cointime" ]; then
+if [ -z "$coin_time" ]; then
 # user hit ESC/cancel
 exit
 fi
@@ -239,23 +239,24 @@ fi
 # tools know where to look for data.
 echo 'STORAGE_USER='"${STORAGE_USER}"'
 STORAGE_ROOT='"${STORAGE_ROOT}"'
-PRIMARY_HOSTNAME='"${DomainName}"'
+PRIMARY_HOSTNAME='"${Domain_Name}"'
 
-UsingDomain='"${UsingDomain}"'
-UsingSubDomain='"${UsingSubDomain}"'
-DomainName='"${DomainName}"'
-StratumURL='"${StratumURL}"'
-InstallSSL='"${InstallSSL}"'
-SupportEmail='"${SupportEmail}"'
-AdminPass='"'"''"${AdminPass}"''"'"'
+Using_Domain='"${Using_Domain}"'
+Using_Sub_Domain='"${Using_Sub_Domain}"'
+Domain_Name='"${Domain_Name}"'
+Stratum_URL='"${Stratum_URL}"'
+Install_SSL='"${Install_SSL}"'
+Support_Email='"${Support_Email}"'
+Admin_Pass='"'"''"${Admin_Pass}"''"'"'
 
-coinname='"'"''"${coinname}"''"'"'
-coinsymbol='"'"''"${coinsymbol}"''"'"'
-coinalgo='"'"''"${coinalgo}"''"'"'
-cointime='"'"''"${cointime}"''"'"'
-coinrepo='"'"''"${coinrepo}"''"'"'
+coin_name='"'"''"${coin_name}"''"'"'
+coin_symbol='"'"''"${coin_symbol}"''"'"'
+coin_algo='"'"''"${coin_algo}"''"'"'
+coin_time='"'"''"${coin_time}"''"'"'
+coin_repo='"'"''"${coin_repo}"''"'"'
 
 # Unless you do some serious modifications this installer will not work with any other repo of nomp!
+YiiMPRepo='https://github.com/cryptopool-builders/NiceNOMP.git'
 ' | sudo -E tee $STORAGE_ROOT/nomp/.nomp.conf >/dev/null 2>&1
 
 cd $HOME/multipool/nomp

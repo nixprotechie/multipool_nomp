@@ -27,6 +27,7 @@ cd $STORAGE_ROOT/nomp/site/
 
 # NPM install and update, user can ignore errors
 npm install >/dev/null 2>&1
+npm update
 npm i npm@latest -g >/dev/null 2>&1
 
 
@@ -51,25 +52,25 @@ wallet="$("${coind}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coi
 fi
 
 # SED the coin file
-sudo sed -i 's/coinname/'$coinname'/g' $coinname.json
+sudo sed -i 's/coin_name/'$coinname'/g' $coinname.json
 sudo sed -i 's/wallet/'$wallet'/g' $coinname.json
-sudo sed -i 's/daemonport/'$rpcport'/g' $coinname.json
-sudo sed -i 's/rpcuser/NOMPrpc/g' $coinname.json
-sudo sed -i 's/rpcpass/'$rpcpassword'/g' $coinname.json
-sudo sed -i 's/randportlow/'$randportlow'/g' $coinname.json
-sudo sed -i 's/randportvar/'$randportvar'/g' $coinname.json
-sudo sed -i 's/randporthigh/'$randporthigh'/g' $coinname.json
+sudo sed -i 's/daemon_port/'$rpcport'/g' $coinname.json
+sudo sed -i 's/rpc_user/NOMPrpc/g' $coinname.json
+sudo sed -i 's/rpc_pass/'$rpcpassword'/g' $coinname.json
+sudo sed -i 's/rand_port_low/'$randportlow'/g' $coinname.json
+sudo sed -i 's/rand_port_var/'$randportvar'/g' $coinname.json
+sudo sed -i 's/rand_port_high/'$randporthigh'/g' $coinname.json
 
 cd $STORAGE_ROOT/nomp/site/coins
 
 sudo cp -r default.json $coinname.json
-sudo sed -i 's/coinname/'$coinname'/g' $coinname.json
-sudo sed -i 's/coinsymbol/'$coinsymbol'/g' $coinname.json
-sudo sed -i 's/coinalgo/'$coinalgo'/g' $coinname.json
-sudo sed -i 's/getblockapi/'$getblockapi'/g' $coinname.json
-sudo sed -i 's/blockexplorer/'$blockexplorer'/g' $coinname.json
-sudo sed -i 's/getblocktx/'$getblocktx'/g' $coinname.json
-sudo sed -i 's/cointime/'$cointime'/g' $coinname.json
+sudo sed -i 's/coin_name/'$coinname'/g' $coinname.json
+sudo sed -i 's/coin_symbol/'$coinsymbol'/g' $coinname.json
+sudo sed -i 's/coin_algo/'$coinalgo'/g' $coinname.json
+sudo sed -i 's/get_block_api/'$getblockapi'/g' $coinname.json
+sudo sed -i 's/block_explorer/'$blockexplorer'/g' $coinname.json
+sudo sed -i 's/get_block_tx/'$getblocktx'/g' $coinname.json
+sudo sed -i 's/coin_time/'$cointime'/g' $coinname.json
 
 # Allow user account to bind to port 80 and 443 with out sudo privs
 # apt_install authbind

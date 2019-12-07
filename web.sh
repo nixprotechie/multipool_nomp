@@ -12,17 +12,17 @@ cd $STORAGE_ROOT/nomp/nomp_setup/nomp
 sudo cp -r $STORAGE_ROOT/nomp/nomp_setup/nomp/. $STORAGE_ROOT/nomp/site/
 
 echo -e " Generating nginx configs...$COL_RESET"
-if [[ ("$UsingSubDomain" == "y" || "$UsingSubDomain" == "Y" || "$UsingSubDomain" == "yes" || "$UsingSubDomain" == "Yes" || "$UsingSubDomain" == "YES") ]]; then
+if [[ ("$Using_Sub_Domain" == "y" || "$Using_Sub_Domain" == "Y" || "$Using_Sub_Domain" == "yes" || "$Using_Sub_Domain" == "Yes" || "$Using_Sub_Domain" == "YES") ]]; then
   cd $HOME/multipool/nomp
   source nginx_subdomain_nonssl.sh
-    if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
+    if [[ ("$Install_SSL" == "y" || "$Install_SSL" == "Y" || "$Install_SSL" == "yes" || "$Install_SSL" == "Yes" || "$Install_SSL" == "YES") ]]; then
       cd $HOME/multipool/nomp
       source nginx_subdomain_ssl.sh
     fi
       else
         cd $HOME/multipool/nomp
         source nginx_domain_nonssl.sh
-    if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
+    if [[ ("$Install_SSL" == "y" || "$Install_SSL" == "Y" || "$Install_SSL" == "yes" || "$Install_SSL" == "Yes" || "$Install_SSL" == "YES") ]]; then
       cd $HOME/multipool/nomp
       source nginx_domain_ssl.sh
     fi

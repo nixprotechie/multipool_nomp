@@ -50,7 +50,7 @@ source daemon.sh
 source build_coin.sh
 source nomp.sh
 source motd.sh
-if [[ ("$UsingDomain" == "Yes") ]]; then
+if [[ ("$Using_Domain" == "Yes") ]]; then
   source send_mail.sh
 fi
 source server_harden.sh
