@@ -28,14 +28,21 @@ export NCURSES_NO_UTF8_ACS=1
 # Create the temporary installation directory if it doesn't already exist.
 echo Creating the NOMP directories...
 if [ ! -d $STORAGE_ROOT/nomp/nomp_setup ]; then
-  sudo mkdir -p $STORAGE_ROOT/{wallets,nomp/{nomp_setup/{tmp,log},site/log,starts}}
+  sudo mkdir -p $STORAGE_ROOT/{wallets,nomp/{nomp_setup/{tmp,log},configuration/{aux_configs,coins,pool_configs},core,site,logs,starts}}
   sudo touch $STORAGE_ROOT/nomp/nomp_setup/log/installer.log
   sudo mkdir -p $HOME/multipool/daemon_builder
 fi
 
+# Set user permission now so we can copy without issues.
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/site
-sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/site/log
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/logs
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/starts
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/core
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/configuration
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/configuration/aux_configs
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/configuration/coins
+sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/configuration/pool_configs
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/wallets
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/nomp/nomp_setup/tmp
 

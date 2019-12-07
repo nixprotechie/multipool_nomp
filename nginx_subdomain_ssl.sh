@@ -49,8 +49,8 @@ server {
 	include cryptopool.builders/security.conf;
 
 	# logging
-	access_log '"${STORAGE_ROOT}"'/nomp/site/log/'"${Domain_Name}"'.app.access.log;
-	error_log '"${STORAGE_ROOT}"'/nomp/site/log/'"${Domain_Name}"'.app.error.log warn;
+	access_log '"${STORAGE_ROOT}"'/nomp/logs/'"${Domain_Name}"'.app.access.log;
+	error_log '"${STORAGE_ROOT}"'/nomp/logs/'"${Domain_Name}"'.app.error.log warn;
 
 	# reverse proxy
 	location / {
@@ -78,7 +78,7 @@ server {
 ' | sudo -E tee /etc/nginx/sites-available/${Domain_Name}.conf >/dev/null 2>&1
 
 sudo ln -s /etc/nginx/sites-available/${Domain_Name}.conf /etc/nginx/sites-enabled/${Domain_Name}.conf
-sudo ln -s $STORAGE_ROOT/yiimp/site/web/website /var/www/${Domain_Name}/html
+sudo ln -s $STORAGE_ROOT/nomp/site/web /var/www/${Domain_Name}/html
 
 restart_service nginx
 cd $HOME/multipool/nomp

@@ -22,21 +22,29 @@ function EPHYMERAL_PORT(){
 }
 
 echo -e " Making the NOMPness Monster...$COL_RESET"
-
+echo -e " Script will seem to hang for several minutes...$COL_RESET"
 cd $STORAGE_ROOT/nomp/site/
 
 # NPM install and update, user can ignore errors
 npm install >/dev/null 2>&1
-npm update
+echo -e " Still working on it...$COL_RESET"
+npm update >/dev/null 2>&1
+echo -e " Almost done...$COL_RESET"
 npm i npm@latest -g >/dev/null 2>&1
-
+echo -e " Almost there...$COL_RESET"
+npm install -g pm2@latest >/dev/null 2>&1
+echo -e " Are we there yet...$COL_RESET"
+npm install -g npm@latest >/dev/null 2>&1
+echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
+echo -e " Just kidding, we hacked the White House...$COL_RESET"
 
 # SED config file
-sudo sed -i 's/FQDN/'$StratumURL'/g' config.json
-sudo sed -i 's/PASSWORD/'$AdminPass'/g' config.json
+sudo sed -i 's/FQDN/'$StratumURL'/g' $STORAGE_ROOT/nomp/configuration/config.json
+sudo sed -i 's/PASSWORD/'$AdminPass'/g' $STORAGE_ROOT/nomp/configuration/config.json
+sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 
 # Create the coin json file
-cd $STORAGE_ROOT/nomp/site/pool_configs
+cd $STORAGE_ROOT/nomp/configuration/pool_configs
 sudo cp -r base_samp.json.x $coinname.json
 
 # Generate our random ports
@@ -44,49 +52,42 @@ randportlow=$(EPHYMERAL_PORT)
 randportvar=$(EPHYMERAL_PORT)
 randporthigh=$(EPHYMERAL_PORT)
 
-#Generate new wallet address
+# Generate new wallet address
 if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
 wallet="$("${coind::-1}-cli" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coind::-1}.conf" getnewaddress)"
 else
 wallet="$("${coind}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coind::-1}.conf" getnewaddress)"
 fi
 
-# SED the coin file
-sudo sed -i 's/coin_name/'$coinname'/g' $coinname.json
-sudo sed -i 's/wallet/'$wallet'/g' $coinname.json
-sudo sed -i 's/daemon_port/'$rpcport'/g' $coinname.json
-sudo sed -i 's/rpc_user/NOMPrpc/g' $coinname.json
-sudo sed -i 's/rpc_pass/'$rpcpassword'/g' $coinname.json
-sudo sed -i 's/rand_port_low/'$randportlow'/g' $coinname.json
-sudo sed -i 's/rand_port_var/'$randportvar'/g' $coinname.json
-sudo sed -i 's/rand_port_high/'$randporthigh'/g' $coinname.json
+# SED the pool_config with our variables.
+sudo sed -i 's/coin_name/'$coin_name'/g' $coin_name.json
+sudo sed -i 's/wallet/'$wallet'/g' $coin_name.json
+sudo sed -i 's/daemon_port/'$rpc_port'/g' $coin_name.json
+sudo sed -i 's/rpc_user/NOMPrpc/g' $coin_name.json
+sudo sed -i 's/rpc_pass/'$rpc_password'/g' $coin_name.json
+sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $coin_name.json
+sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $coin_name.json
+sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $coin_name.json
 
-cd $STORAGE_ROOT/nomp/site/coins
+# Change to the coins config folder and SED those with our variables.
+cd $STORAGE_ROOT/nomp/configuration/coins
+sudo cp -r default.json $coin_name.json
+sudo sed -i 's/coin_name/'$coin_name'/g' $coin_name.json
+sudo sed -i 's/coin_symbol/'$coin_symbol'/g' $coin_name.json
+sudo sed -i 's/coin_algo/'$coin_algo'/g' $coin_name.json
+sudo sed -i 's/get_block_api/'$get_block_api'/g' $coin_name.json
+sudo sed -i 's/block_explorer/'$block_explorer'/g' $coin_name.json
+sudo sed -i 's/get_block_tx/'$get_block_tx'/g' $coin_name.json
+sudo sed -i 's/coin_time/'$coin_time'/g' $coin_name.json
 
-sudo cp -r default.json $coinname.json
-sudo sed -i 's/coin_name/'$coinname'/g' $coinname.json
-sudo sed -i 's/coin_symbol/'$coinsymbol'/g' $coinname.json
-sudo sed -i 's/coin_algo/'$coinalgo'/g' $coinname.json
-sudo sed -i 's/get_block_api/'$getblockapi'/g' $coinname.json
-sudo sed -i 's/block_explorer/'$blockexplorer'/g' $coinname.json
-sudo sed -i 's/get_block_tx/'$getblocktx'/g' $coinname.json
-sudo sed -i 's/coin_time/'$cointime'/g' $coinname.json
-
-# Allow user account to bind to port 80 and 443 with out sudo privs
-# apt_install authbind
-# sudo touch /etc/authbind/byport/80
-# sudo touch /etc/authbind/byport/443
-# sudo chmod 777 /etc/authbind/byport/80
-# sudo chmod 777 /etc/authbind/byport/443
-
-# Update site with users information
-cd $STORAGE_ROOT/nomp/site/website/
-sudo sed -i 's/sed_domain/'$DomainName'/g' index.html
-cd $STORAGE_ROOT/nomp/site/website/pages/
-sudo sed -i 's/sed_domain/'$DomainName'/g' dashboard.html
-sudo sed -i 's/sed_stratum/'$StratumURL'/g' getting_started.html
-sudo sed -i 's/sed_domain/'$DomainName'/g' home.html
-sudo sed -i 's/sed_stratum/'$StratumURL'/g' pools.html
+# SED the website files with our variables.
+cd $STORAGE_ROOT/nomp/site/web/
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' index.html
+cd $STORAGE_ROOT/nomp/site/web/pages/
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' dashboard.html
+sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' getting_started.html
+sudo sed -i 's/sed_domain/'$Domain_Name'/g' home.html
+sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' pools.html
 
 echo -e "$GREEN Done with the NOMP...$COL_RESET"
 cd $HOME/multipool/nomp
