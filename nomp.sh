@@ -26,7 +26,7 @@ echo -e " Script will seem to hang for several minutes...$COL_RESET"
 cd $STORAGE_ROOT/nomp/core/
 
 # NPM install and update, user can ignore errors
-npm install
+npm install bignum
 echo -e " Still working on it...$COL_RESET"
 npm update
 echo -e " Almost done...$COL_RESET"

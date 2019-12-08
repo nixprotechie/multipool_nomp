@@ -33,7 +33,6 @@ fi
 echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Setting correct folder permissions...$COL_RESET"
-echo
 whoami=`whoami`
 sudo usermod -aG www-data $whoami
 sudo usermod -a -G www-data $whoami

@@ -119,7 +119,6 @@ apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Downloading cryptopool.builders NOMP Repo...$COL_RESET"
-echo
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/nomp/nomp_setup/nomp
 echo -e "$GREEN Done...$COL_RESET"
 
