@@ -48,9 +48,9 @@ sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config
 sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/base_samp.json.x $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
 # Generate our random ports
-randportlow=$(EPHYMERAL_PORT)
-randportvar=$(EPHYMERAL_PORT)
-randporthigh=$(EPHYMERAL_PORT)
+rand_port_low=$(EPHYMERAL_PORT)
+rand_port_var=$(EPHYMERAL_PORT)
+rand_port_high=$(EPHYMERAL_PORT)
 
 # Generate new wallet address
 if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
