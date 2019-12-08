@@ -26,15 +26,15 @@ echo -e " Script will seem to hang for several minutes...$COL_RESET"
 cd $STORAGE_ROOT/nomp/core/
 
 # NPM install and update, user can ignore errors
-npm install bignum
+npm install bignum >/dev/null 2>&1
 echo -e " Still working on it...$COL_RESET"
-npm update
+npm update >/dev/null 2>&1
 echo -e " Almost done...$COL_RESET"
-npm i npm@latest -g
+npm i npm@latest -g >/dev/null 2>&1
 echo -e " Almost there...$COL_RESET"
-npm install -g pm2@latest
+npm install -g pm2@latest >/dev/null 2>&1
 echo -e " Are we there yet...$COL_RESET"
-npm install -g npm@latest
+npm install -g npm@latest >/dev/null 2>&1
 echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
 echo -e " Just kidding, we hacked the White House...$COL_RESET"
 
@@ -45,11 +45,13 @@ sudo sed -i 's/PASSWORD/'$Admin_Pass'/g' $STORAGE_ROOT/nomp/configuration/config
 sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 
 # Change to the coins config folder check for existing config, if not let the user know.
+coin_no_coin=$coin_name
+coin_no_coin=${coin_name//coin/}
+
 if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
   echo -e " ${coin_name}.json created..."
 elif
-  coin_name="${coin//coin}"
-  [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
+  [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_no_coin}.json ]; then
   echo -e " ${coin_name}.json created..."
 else
   sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
@@ -59,7 +61,7 @@ else
 fi
 
 # Create coin pool_config json file.
-sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/base_samp.json.x $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
+sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/pool_config_base $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
 # Generate our random ports
 rand_port_low=$(EPHYMERAL_PORT)

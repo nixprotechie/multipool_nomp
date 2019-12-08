@@ -195,7 +195,7 @@ exit;
 fi
 
 # set the $coin_name variable to all lower case.
-coin_name=${coin,,}
+coin_name=${coin_name,,}
 
 # Save the global options in $STORAGE_ROOT/yiimp/.yiimp.conf so that standalone
 # tools know where to look for data.
@@ -212,7 +212,6 @@ Support_Email='"${Support_Email}"'
 Admin_Pass='"'"''"${Admin_Pass}"''"'"'
 
 coin_name='"'"''"${coin_name}"''"'"'
-coin_symbol='"'"''"${coin_symbol}"''"'"'
 
 # Unless you do some serious modifications this installer will not work with any other repo of nomp!
 YiiMPRepo='https://github.com/cryptopool-builders/cryptopool.builders-nomp-pool.git'
