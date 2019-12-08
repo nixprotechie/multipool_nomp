@@ -49,15 +49,16 @@ coin_no_coin=$coin_name
 coin_no_coin=${coin_name//coin/}
 
 if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
-  echo -e " ${coin_name}.json created..."
+  echo -e " ${coin_name}.json created, release the hounds!"
 elif
   [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_no_coin}.json ]; then
-  echo -e " ${coin_name}.json created..."
+    coin_name=$coin_no_coin
+  echo -e " ${coin_name}.json created, release the hounds!"
 else
   sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
   sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
   echo -e " You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information."
-  echo -e " Until you edit this file your pool will not start"
+  echo -e " Until you edit this file your pool will not start! Sorry not sorry..."
 fi
 
 # Create coin pool_config json file.
