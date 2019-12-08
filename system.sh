@@ -113,8 +113,8 @@ cd
 . ~/.nvm/nvm.sh
 . ~/.profile
 . ~/.bashrc
-nvm install 12.10.3
-nvm use 12.10.3
+nvm install 12.13.1
+nvm use 12.13.1
 apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 
