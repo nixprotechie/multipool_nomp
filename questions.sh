@@ -123,7 +123,8 @@ fi
 if [ -z "$coin_name" ]; then
 DEFAULT_coin_name=Bitcoin
 input_box "Coin Name" \
-"Enter your first coins name..
+"Enter your coins proper name here. Do not use spaces.
+\n\nFor example; Ravencoin, Verge, Bitcoincash, etc...
 \n\nCoin Name:" \
 $DEFAULT_coin_name \
 coin_name
@@ -146,48 +147,6 @@ $DEFAULT_coin_repo \
 coin_repo
 
 if [ -z "$coin_repo" ]; then
-# user hit ESC/cancel
-exit
-fi
-fi
-
-if [ -z "$coin_symbol" ]; then
-DEFAULT_coin_symbol=BTC
-input_box "Coin Symbol" \
-"Enter your coins symbol..
-\n\nCoin Symbol:" \
-$DEFAULT_coin_symbol \
-coin_symbol
-
-if [ -z "$coin_symbol" ]; then
-# user hit ESC/cancel
-exit
-fi
-fi
-
-if [ -z "$coin_algo" ]; then
-DEFAULT_coin_algo=sha256
-input_box "Coin Algorithm" \
-"Enter your coins algorithm.. Enter as all lower case...
-\n\nCoin Algorithm:" \
-$DEFAULT_coin_algo \
-coin_algo
-
-if [ -z "$coin_algo" ]; then
-# user hit ESC/cancel
-exit
-fi
-fi
-
-if [ -z "$coin_time" ]; then
-DEFAULT_coin_time=120
-input_box "Coin Block Time" \
-"Enter your coins block time in seconds..
-\n\nCoin Block Time:" \
-$DEFAULT_coin_time \
-coin_time
-
-if [ -z "$coin_time" ]; then
 # user hit ESC/cancel
 exit
 fi
@@ -235,6 +194,9 @@ clear;
 exit;
 fi
 
+# set the $coin_name variable to all lower case.
+coin_name=${coin,,}
+
 # Save the global options in $STORAGE_ROOT/yiimp/.yiimp.conf so that standalone
 # tools know where to look for data.
 echo 'STORAGE_USER='"${STORAGE_USER}"'
@@ -251,9 +213,6 @@ Admin_Pass='"'"''"${Admin_Pass}"''"'"'
 
 coin_name='"'"''"${coin_name}"''"'"'
 coin_symbol='"'"''"${coin_symbol}"''"'"'
-coin_algo='"'"''"${coin_algo}"''"'"'
-coin_time='"'"''"${coin_time}"''"'"'
-coin_repo='"'"''"${coin_repo}"''"'"'
 
 # Unless you do some serious modifications this installer will not work with any other repo of nomp!
 YiiMPRepo='https://github.com/cryptopool-builders/NiceNOMP.git'

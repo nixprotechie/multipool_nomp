@@ -106,16 +106,15 @@ autoconf pkg-config libssl-dev libboost-all-dev git \
 libminiupnpc-dev
 echo -e "$GREEN Done...$COL_RESET"
 
-echo -e " Installing Node 8.x$COL_RESET"
+echo -e " Installing Node 12.x$COL_RESET"
 cd $STORAGE_ROOT/nomp/nomp_setup/tmp
 curl -ss -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash >/dev/null 2>&1
 cd
 . ~/.nvm/nvm.sh
 . ~/.profile
 . ~/.bashrc
-nvm install 8.11.4 >/dev/null 2>&1
-nvm use 8.11.4 >/dev/null 2>&1
-# sudo chown -R $USER /usr/lib/node_modules
+nvm install 12.10.3
+nvm use 12.10.3
 apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 

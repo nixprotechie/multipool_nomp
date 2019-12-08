@@ -26,15 +26,15 @@ echo -e " Script will seem to hang for several minutes...$COL_RESET"
 cd $STORAGE_ROOT/nomp/core/
 
 # NPM install and update, user can ignore errors
-npm install >/dev/null 2>&1
+npm install
 echo -e " Still working on it...$COL_RESET"
-npm update >/dev/null 2>&1
+npm update
 echo -e " Almost done...$COL_RESET"
-npm i npm@latest -g >/dev/null 2>&1
+npm i npm@latest -g
 echo -e " Almost there...$COL_RESET"
-npm install -g pm2@latest >/dev/null 2>&1
+npm install -g pm2@latest
 echo -e " Are we there yet...$COL_RESET"
-npm install -g npm@latest >/dev/null 2>&1
+npm install -g npm@latest
 echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
 echo -e " Just kidding, we hacked the White House...$COL_RESET"
 
@@ -44,7 +44,7 @@ sudo sed -i 's/Stratum_URL/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/configuration/co
 sudo sed -i 's/PASSWORD/'$Admin_Pass'/g' $STORAGE_ROOT/nomp/configuration/config.json
 sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 
-# Create the coin json file
+# Create coin pool_config json file.
 sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/base_samp.json.x $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
 # Generate our random ports
@@ -69,15 +69,19 @@ sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $STORAGE_ROOT/nomp/configuratio
 sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
-# Change to the coins config folder and SED those with our variables.
-sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/coin_symbol/'$coin_symbol'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/coin_algo/'$coin_algo'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/get_block_api/'$get_block_api'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/block_explorer/'$block_explorer'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/get_block_tx/'$get_block_tx'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-sudo sed -i 's/coin_time/'$coin_time'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+# Change to the coins config folder check for existing config, if not let the user know.
+if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
+  echo -e " ${coin_name}.json created..."
+elif
+  coin_name="${coin//coin}"
+  [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
+  echo -e " ${coin_name}.json created..."
+else
+  sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+  sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+  echo -e " You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information."
+  echo -e " Until you edit this file your pool will not start"
+fi
 
 # SED the website files with our variables.
 sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/index.html
