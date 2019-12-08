@@ -103,7 +103,7 @@ fi
 hide_output sudo apt-get update
 apt_install nginx build-essential libtool autotools-dev \
 autoconf pkg-config libssl-dev libboost-all-dev git \
-libminiupnpc-dev libgmp3-dev
+libminiupnpc-dev libgmp3-dev libboost-dev libboost-system-dev libsodium-dev
 echo -e "$GREEN Done...$COL_RESET"
 
 echo -e " Installing Node 12.x$COL_RESET"
@@ -113,8 +113,8 @@ cd
 . ~/.nvm/nvm.sh
 . ~/.profile
 . ~/.bashrc
-nvm install 12.13.1 >/dev/null 2>&1
-nvm use 12.13.1 >/dev/null 2>&1
+nvm install 12.0.0 >/dev/null 2>&1
+nvm use 12.0.0 >/dev/null 2>&1
 apt_install npm
 echo -e "$GREEN Done...$COL_RESET"
 
