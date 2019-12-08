@@ -38,11 +38,25 @@ npm install -g npm@latest
 echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
 echo -e " Just kidding, we hacked the White House...$COL_RESET"
 
-# SED config file
+# SED the config file
 sudo sed -i 's/domain_name/'$Domain_Name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 sudo sed -i 's/Stratum_URL/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/configuration/config.json
 sudo sed -i 's/PASSWORD/'$Admin_Pass'/g' $STORAGE_ROOT/nomp/configuration/config.json
 sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
+
+# Change to the coins config folder check for existing config, if not let the user know.
+if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
+  echo -e " ${coin_name}.json created..."
+elif
+  coin_name="${coin//coin}"
+  [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
+  echo -e " ${coin_name}.json created..."
+else
+  sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+  sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+  echo -e " You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information."
+  echo -e " Until you edit this file your pool will not start"
+fi
 
 # Create coin pool_config json file.
 sudo cp -r $STORAGE_ROOT/nomp/configuration/pool_configs/base_samp.json.x $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
@@ -68,20 +82,6 @@ sudo sed -i 's/rpc_pass/'$rpc_password'/g' $STORAGE_ROOT/nomp/configuration/pool
 sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
-
-# Change to the coins config folder check for existing config, if not let the user know.
-if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
-  echo -e " ${coin_name}.json created..."
-elif
-  coin_name="${coin//coin}"
-  [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
-  echo -e " ${coin_name}.json created..."
-else
-  sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-  sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-  echo -e " You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information."
-  echo -e " Until you edit this file your pool will not start"
-fi
 
 # SED the website files with our variables.
 sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/index.html
