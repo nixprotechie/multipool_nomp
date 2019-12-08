@@ -83,12 +83,10 @@ sudo sed -i 's/rand_port_low/'$rand_port_low'/g' $STORAGE_ROOT/nomp/configuratio
 sudo sed -i 's/rand_port_var/'$rand_port_var'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 sudo sed -i 's/rand_port_high/'$rand_port_high'/g' $STORAGE_ROOT/nomp/configuration/pool_configs/$coin_name.json
 
-# SED the website files with our variables.
+ # SED the website files with our variables.
 sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/index.html
-sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/pages/dashboard.html
-sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/site/web/pages/getting_started.html
 sudo sed -i 's/sed_domain/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/pages/home.html
-sudo sed -i 's/sed_stratum/'$Stratum_URL'/g' $STORAGE_ROOT/nomp/site/web/pages/pools.html
+sudo sed -i 's/sed_stratum/'$Domain_Name'/g' $STORAGE_ROOT/nomp/site/web/pages/statistics.html
 
 echo -e "$GREEN Done with the NOMP...$COL_RESET"
 cd $HOME/multipool/nomp

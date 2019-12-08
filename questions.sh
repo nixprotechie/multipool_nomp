@@ -215,7 +215,7 @@ coin_name='"'"''"${coin_name}"''"'"'
 coin_symbol='"'"''"${coin_symbol}"''"'"'
 
 # Unless you do some serious modifications this installer will not work with any other repo of nomp!
-YiiMPRepo='https://github.com/cryptopool-builders/NiceNOMP.git'
+YiiMPRepo='https://github.com/cryptopool-builders/cryptopool.builders-nomp-pool.git'
 ' | sudo -E tee $STORAGE_ROOT/nomp/.nomp.conf >/dev/null 2>&1
 
 cd $HOME/multipool/nomp
