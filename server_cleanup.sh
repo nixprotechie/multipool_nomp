@@ -24,7 +24,7 @@ source /etc/multipool.conf
 # BTC Donation: 12Pt3vQhQpXvyzBd5qcoL17ouhNFyihyz5
 #
 ################################################################################
-cd $STORAGE_ROOT/nomp/site
+cd $STORAGE_ROOT/nomp/core
 screen -dmS nomp node init.js
 ' | sudo -E tee $STORAGE_ROOT/nomp/starts/nomp.start.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/nomp/starts/nomp.start.sh

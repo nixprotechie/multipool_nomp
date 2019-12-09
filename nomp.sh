@@ -36,7 +36,7 @@ npm install -g pm2@latest >/dev/null 2>&1
 echo -e " Are we there yet...$COL_RESET"
 npm install -g npm@latest >/dev/null 2>&1
 echo -e " We have successfully hacked the NSA using this server...$COL_RESET"
-echo -e " Just kidding, we hacked the White House...$COL_RESET"
+echo -e "$GREEN Just kidding, we hacked the White House...$COL_RESET"
 
 # SED the config file
 sudo sed -i 's/domain_name/'$Domain_Name'/g' $STORAGE_ROOT/nomp/configuration/config.json
@@ -45,9 +45,6 @@ sudo sed -i 's/PASSWORD/'$Admin_Pass'/g' $STORAGE_ROOT/nomp/configuration/config
 sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/config.json
 
 # Change to the coins config folder check for existing config, if not let the user know.
-coin_no_coin=$coin_name
-coin_no_coin=${coin_name//coin/}
-
 if [ -f $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json ]; then
   echo -e " ${coin_name}.json created, release the hounds!"
 elif
@@ -57,8 +54,9 @@ elif
 else
   sudo cp -r $STORAGE_ROOT/nomp/configuration/coins/default.json $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
   sudo sed -i 's/coin_name/'$coin_name'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
-  echo -e " You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information."
-  echo -e " Until you edit this file your pool will not start! Sorry not sorry..."
+  sudo sed -i 's/coin_symbol/'$coin_symbol'/g' $STORAGE_ROOT/nomp/configuration/coins/$coin_name.json
+  echo -e "$RED You will need to edit $STORAGE_ROOT/nomp/configuration/coins/${coin_name}.json with additional information.$COL_RESET"
+  echo -e "$RED Until you edit this file your pool will not work correctly! Sorry not sorry...$COL_RESET"
 fi
 
 # Create coin pool_config json file.

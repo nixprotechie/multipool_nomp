@@ -89,7 +89,7 @@ Using_Sub_Domain=no
 Install_SSL=no
 fi
 
-if [ -z "$Admin_Pass" ]; then
+if [ -z "${Admin_Pass:-}" ]; then
 DEFAULT_Admin_Pass=$(openssl rand -base64 8 | tr -d "=+/")
 input_box "Admin Password" \
 "Enter your new Admin password or use this randomly system generated one.
@@ -104,7 +104,7 @@ exit
 fi
 fi
 
-if [ -z "$Support_Email" ]; then
+if [ -z "${Support_Email:-}" ]; then
 DEFAULT_Support_Email=root@localhost
 input_box "System Email" \
 "Enter an email address for the system to send alerts and other important messages.
@@ -120,7 +120,7 @@ fi
 
 # Get the coind info they want to build during install.
 
-if [ -z "$coin_name" ]; then
+if [ -z "${coin_name:-}" ]; then
 DEFAULT_coin_name=Bitcoin
 input_box "Coin Name" \
 "Enter your coins proper name here. Do not use spaces.
@@ -135,7 +135,21 @@ exit
 fi
 fi
 
-if [ -z "$coin_repo" ]; then
+if [ -z "${coin_symbol:-}" ]; then
+DEFAULT_coin_symbol=BTC
+input_box "Coin Symbol" \
+"Enter your coins symbol..Make sure to use all CAPS...
+\n\nCoin Symbol:" \
+$DEFAULT_coin_symbol \
+coin_symbol
+
+if [ -z "$coin_symbol" ]; then
+# user hit ESC/cancel
+exit
+fi
+fi
+
+if [ -z "${coin_repo:-}" ]; then
 DEFAULT_coin_repo="https://github.com/bitcoin/bitcoin.git"
 input_box "Default Coin Repo" \
 "Enter your coins repo to use..
@@ -196,6 +210,9 @@ fi
 
 # set the $coin_name variable to all lower case.
 coin_name=${coin_name,,}
+# set the secondary json search without the word coin in it. 
+coin_no_coin=$coin_name
+coin_no_coin=${coin_name//coin/}
 
 # Save the global options in $STORAGE_ROOT/yiimp/.yiimp.conf so that standalone
 # tools know where to look for data.
@@ -212,6 +229,8 @@ Support_Email='"${Support_Email}"'
 Admin_Pass='"'"''"${Admin_Pass}"''"'"'
 
 coin_name='"'"''"${coin_name}"''"'"'
+coin_symbol='"'"''"${coin_symbol}"''"'"'
+coin_no_coin='"'"''"${coin_no_coin}"''"'"'
 
 # Unless you do some serious modifications this installer will not work with any other repo of nomp!
 YiiMPRepo='https://github.com/cryptopool-builders/cryptopool.builders-nomp-pool.git'

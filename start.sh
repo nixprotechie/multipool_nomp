@@ -64,8 +64,11 @@ source server_harden.sh
 source server_cleanup.sh
 
 clear
-echo Installation of your NOMP single server is now completed.
-echo You *MUST* reboot the machine to finalize the machine updates and folder permissions! NOMP will not function until a reboot is performed!
+echo -e "Installation of your NOMP server is now completed."
+echo -e "You $RED*MUST REBOOT*$COL_RESET the machine to finalize the machine updates and folder permissions! $MAGENTA NOMP will not function until a reboot is performed!$COL_RESET"
 echo
+echo -e "$YELLOW If you are using the servers IP instead of a domain name you will be alerted that your website has an invalid certificate.$COL_RESET"
 echo
-echo By default all stratum ports are blocked by the firewall. To allow a port through, from the command prompt type sudo ufw allow port number.
+echo -e "$RED By default all stratum ports are blocked by the firewall.$COL_RESET To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
+
+exit 0
