@@ -70,5 +70,18 @@ echo
 echo -e "$YELLOW If you are using the servers IP instead of a domain name you will be alerted that your website has an invalid certificate.$COL_RESET"
 echo
 echo -e "$RED By default all stratum ports are blocked by the firewall.$COL_RESET To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
+# Done.
+echo
+echo "-----------------------------------------------"
+echo
+echo Thank you for using the Ultimate Crypto-Server Setup Installer!
+echo
+echo To run this installer anytime simply type, multipool!
+echo Donations for continued support of this script are welcomed at:
+echo
+echo BTC 3DvcaPT3Kio8Hgyw4ZA9y1feNnKZjH7Y21
+echo BCH qrf2fhk2pfka5k649826z4683tuqehaq2sc65nfz3e
+echo ETH 0x6A047e5410f433FDBF32D7fb118B6246E3b7C136
+echo LTC MLS5pfgb7QMqBm3pmBvuJ7eRCRgwLV25Nz
 
 exit 0

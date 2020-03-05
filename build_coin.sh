@@ -73,7 +73,7 @@ if [[ ("$autogen" == "true") ]]; then
     basedir=$(pwd)
     sh autogen.sh >/dev/null 2>&1
     sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coin_dir/share/genbuild.sh
-    sudo chmod 777 $STORAGE_ROOT/daemon_builderr/temp_coin_builds/$coin_dir/src/leveldb/build_detect_platform
+    sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coin_dir/src/leveldb/build_detect_platform
     ./configure CPPFLAGS="-I$STORAGE_ROOT/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/berkeley/db5/lib" --without-gui --disable-tests >/dev/null 2>&1
   fi
   make -j$(nproc)
@@ -149,9 +149,10 @@ echo -e "Starting ${coind::-1}"
 /usr/bin/"${coind}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coind::-1}.conf" -daemon -shrinkdebugfile
 
 # Create easy daemon start file
-echo ''${coind}' -datadir=$STORAGE_ROOT/wallets/.'${coind::-1}' -conf='${coind::-1}'.conf -daemon -shrinkdebugfile
-' | sudo -E tee /usr/bin/"${coin_symbol}_start" >/dev/null 2>&1
-sudo chmod +x /usr/bin/"${coin_symbol}_start"
+coin_symbol_lower=${coin_symbol,,}
+echo ''${coind}' -datadir=${STORAGE_ROOT}/wallets/.'${coind::-1}' -conf='${coind::-1}'.conf -daemon -shrinkdebugfile
+' | sudo -E tee /usr/bin/"${coin_symbol_lower}_start" >/dev/null 2>&1
+sudo chmod +x /usr/bin/"${coin_symbol_lower}_start"
 
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf
@@ -160,6 +161,7 @@ sudo rm -r $HOME/multipool/daemon_builder/.first_build.cnf
 
 echo 'rpcpassword='${rpcpassword}'
 rpcport='${rpcport}''| sudo -E tee $HOME/multipool/daemon_builder/.first_build.cnf >/dev/null 2>&1
-
+sudo chmod 0600 $HOME/multipool/daemon_builder/.first_build.cnf
 echo -e "$GREEN Initial coin build completed...$COL_RESET"
+
 cd $HOME/multipool/nomp
