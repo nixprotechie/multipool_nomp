@@ -171,7 +171,7 @@ RESULT=$(dialog --stdout --title "Select the correct build option below" --menu 
 2 "Build coin with Berkeley 5.x" \
 3 "Build coin with makefile.unix" \
 4 Exit)
-if [ $RESULT = ]
+if [ $RESULT = 0 ]
 then
 exit ;
 fi
