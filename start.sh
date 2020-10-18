@@ -54,7 +54,7 @@ source db.sh
 source nginx_upgrade.sh
 source web.sh
 source daemon.sh
-source build_coin.sh
+#source build_coin.sh
 source nomp.sh
 source motd.sh
 if [[ ("$Using_Domain" == "Yes") ]]; then
