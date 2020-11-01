@@ -47,7 +47,7 @@ input_box "Domain Name" \
 \n\nMake sure the domain is pointed to this server before continuing!
 \n\nDomain Name:" \
 ${DEFAULT_Domain_Name} \
-DomainName
+Domain_Name
 
 if [ -z "${Domain_Name}" ]; then
 # user hit ESC/cancel
@@ -62,7 +62,7 @@ input_box "Stratum URL" \
 \n\nDo not add www. to the domain name.
 \n\nStratum URL:" \
 ${DEFAULT_Stratum_URL} \
-StratumURL
+Stratum_URL
 
 if [ -z "${Stratum_URL}" ]; then
 # user hit ESC/cancel
@@ -171,7 +171,7 @@ RESULT=$(dialog --stdout --title "Select the correct build option below" --menu 
 2 "Build coin with Berkeley 5.x" \
 3 "Build coin with makefile.unix" \
 4 Exit)
-if [ $RESULT = 0 ]
+if [ $RESULT = ]
 then
 exit ;
 fi
